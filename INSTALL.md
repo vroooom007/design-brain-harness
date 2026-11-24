@@ -1,6 +1,6 @@
 # Design Brain Install Procedure
 
-Agent instructions, fetched by the prompt in [`INSTALL_PROMPT.md`](./INSTALL_PROMPT.md). Follow them exactly.
+Command-level details for the prompt in [`INSTALL_PROMPT.md`](./INSTALL_PROMPT.md). The user's pasted prompt already authorizes the whole install and sets the behavior: one pass, no yes/no questions, install only what is missing, write the skill map, give a 5-line summary, then ask the Stage 1 brief questions.
 
 Install the Design Brain skill in one pass. Do not ask the user yes/no questions along the way; only stop for a real error.
 
