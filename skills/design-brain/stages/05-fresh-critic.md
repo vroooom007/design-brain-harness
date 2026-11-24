@@ -6,7 +6,7 @@
 
 - **In Claude Code:** Spawn `.claude/agents/fresh-critic.md` via the subagent tool. Pass ONLY:
   1. The live local URL (or preview HTML paths)
-  2. Paths to `.design-harness/01-brief.md`, `VOICE.md`, `DESIGN.md`, and `exploration/baseline-*.png`
+  2. Paths to `.design-harness/01-brief.md`, `.design-harness/VOICE.md`, `.design-harness/DESIGN.md`, and `.design-harness/exploration/baseline-*.png`
   3. Path to `references/ai-tells-rubric.md`
   4. Path to `.design-harness/skill-map.md` (so the critic knows if `avoid-ai-writing`, `impeccable`, or `web-design-guidelines` are installed)
   **Do NOT pass your build transcript or explanations of why you made design choices.**
@@ -18,7 +18,7 @@
 
 1. **Live Visual Render Audit (Playwright / Browser):**
    - Captures fresh screenshots at **Desktop (1440x900)** and **Mobile (390x844)** (full page + above-the-fold hero).
-   - Inspects rendered images directly for alignment breaks, cramped spacing, weak visual hierarchy, contrast failures, awkward wrapping, or drift away from the locked Baseline (`exploration/baseline-*.png`).
+   - Inspects rendered images directly for alignment breaks, cramped spacing, weak visual hierarchy, contrast failures, awkward wrapping, or drift away from the locked Baseline (`.design-harness/exploration/baseline-*.png`).
 
 2. **4-Axis Weighted Grading (Anthropic Frontend Rubric):**
    Grades 1-10 with concrete `file:line` or visual evidence on:

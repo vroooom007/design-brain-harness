@@ -1,6 +1,6 @@
 # Shareable AI Install Prompt
 
-Replace `vroooom007` with your GitHub handle after pushing this repository, then share the prompt below with anyone using Claude Code, Codex, Cursor, Windsurf, or another AI coding agent.
+This repository is published at https://github.com/vroooom007/design-brain-harness. Share the prompt below with anyone using Claude Code, Codex, Cursor, Windsurf, or another AI coding agent.
 
 ---
 

@@ -20,7 +20,7 @@ Use this rubric ONLY during **Stage 5 (Fresh Critique)**. Do not load it during 
 - Low-contrast unreadable text (fails WCAG AA contrast) or invisible focus states.
 - Placeholder copy, dummy numbers, broken images, or generic stock boxes.
 - **Information bloat:** Repeating the exact same CTA block 3+ times on one page, or dumping 10+ ungrouped feature pill badges in a row.
-- Drift away from the user-approved Baseline (`exploration/baseline-*.png`) or `DESIGN.md`.
+- Drift away from the user-approved Baseline (`.design-harness/exploration/baseline-*.png`) or `DESIGN.md`.
 
 ### Tier 2: AI Reflexes (Fix OR Log Explicit Justification in `overrides.md`)
 *These are the loudest fingerprints of unguided AI design. Remove them by default; keep only if genuinely earned by the brand.*
