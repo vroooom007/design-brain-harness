@@ -6,7 +6,7 @@ Most "anti-AI-slop" prompts only say what not to do. That removes purple gradien
 
 ## Install
 
-**One shot (recommended):** paste the prompt from [`INSTALL_PROMPT.md`](./INSTALL_PROMPT.md) into your coding agent. In a single pass, with no yes/no interruptions, it:
+**One shot (recommended):** paste the one-line prompt from [`INSTALL_PROMPT.md`](./INSTALL_PROMPT.md) into your coding agent. It follows [`INSTALL.md`](./INSTALL.md) and, in a single pass, with no yes/no interruptions, it:
 
 - scans project and global skill folders and leaves anything already installed untouched,
 - installs design-brain (Claude Code plugin, or `npx skills` for Codex, Cursor, Windsurf and others),
@@ -82,7 +82,8 @@ Claude Code gets both subagents from the plugin, or from `skills/design-brain/ag
 ```text
 design-brain-harness/
 ├── README.md
-├── INSTALL_PROMPT.md                  # One-shot prompt to paste into any coding agent
+├── INSTALL_PROMPT.md                  # One-line prompt to paste into any coding agent
+├── INSTALL.md                         # Full install procedure the prompt points to
 ├── VERSION                            # Single source of truth for update checks
 ├── .claude-plugin/
 │   ├── plugin.json                    # Claude Code plugin manifest
