@@ -21,6 +21,9 @@ while [[ $# -gt 0 ]]; do
   esac
 done
 
+SCOPE="project"
+[ -n "$GLOBAL_FLAG" ] && SCOPE="global"
+
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 is_installed() {
@@ -63,12 +66,19 @@ install_via_skills_cli() {
 
 echo "=== Design Brain Harness: Sync Companion Skills (mode=$MODE, agent=$AGENT) ==="
 
-# 1. Impeccable (uses its own CLI for hooks + skills)
-if [ "$MODE" = "missing-only" ] && is_installed "impeccable"; then
-  echo "[SKIP] impeccable is already installed. Preserving existing copy."
+# 1. Impeccable (non-interactive: skills + hooks for claude, codex, cursor)
+if is_installed "impeccable"; then
+  if [ "$MODE" = "update" ]; then
+    echo "[UPDATE] impeccable..."
+    npx --yes impeccable update || echo "[WARN] impeccable update failed; continuing."
+  else
+    echo "[SKIP] impeccable is already installed. Preserving existing copy."
+  fi
 else
-  echo "[INFO] For pbakaus/impeccable, run interactively to choose hooks & provider:"
-  echo "       npx impeccable install"
+  echo "[INSTALL] impeccable (scope=$SCOPE)..."
+  npx --yes impeccable install -y --providers=claude,codex,cursor --scope="$SCOPE" \
+    || npx --yes skills@latest add pbakaus/impeccable --agent "$AGENT" $GLOBAL_FLAG --yes \
+    || echo "[WARN] Could not auto-install impeccable; see https://github.com/pbakaus/impeccable"
 fi
 
 # 2. Emil Kowalski Design Engineering Skills

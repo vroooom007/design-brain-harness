@@ -6,15 +6,54 @@ Most "anti-AI-slop" prompts only say what not to do. That removes purple gradien
 
 ## Install
 
-Paste the prompt from [`INSTALL_PROMPT.md`](./INSTALL_PROMPT.md) into your coding agent. It installs the skill, and the skill sets up the rest itself.
+**One shot (recommended):** paste the prompt from [`INSTALL_PROMPT.md`](./INSTALL_PROMPT.md) into your coding agent. In a single pass, with no yes/no interruptions, it:
 
-Manual install:
+- scans project and global skill folders and leaves anything already installed untouched,
+- installs design-brain (Claude Code plugin, or `npx skills` for Codex, Cursor, Windsurf and others),
+- installs only the missing companion skills, including impeccable, non-interactively,
+- writes `.design-harness/skill-map.md`, prints a 5-line summary, and starts the Stage 1 brief.
+
+**Claude Code plugin (auto-updates):**
 
 ```bash
-npx skills add vroooom007/design-brain-harness --agent universal
+claude plugin marketplace add vroooom007/design-brain-harness
+claude plugin install design-brain@design-brain-marketplace
+```
+
+The plugin bundles the skill and both subagents. To receive updates automatically, enable auto-update for the marketplace in your Claude settings:
+
+```json
+{
+  "extraKnownMarketplaces": {
+    "design-brain-marketplace": {
+      "source": { "source": "github", "repo": "vroooom007/design-brain-harness" },
+      "autoUpdate": true
+    }
+  }
+}
+```
+
+**Other agents (manual):**
+
+```bash
+npx --yes skills@latest add vroooom007/design-brain-harness --agent universal --yes
 ```
 
 Or copy `skills/design-brain/` into your agent's skills folder.
+
+## Updates
+
+- **Claude Code:** marketplace auto-update pulls new plugin versions; run `/reload-plugins` to apply them mid-session.
+- **Every agent:** at session start the skill silently compares its `version:` with the remote [`VERSION`](./VERSION) (3 second timeout, skipped when offline) and updates itself with `npx --yes skills@latest update design-brain -y` when a newer one exists.
+- **Companions:** `bash skills/design-brain/scripts/sync-skills.sh --update` refreshes them; the default `--missing-only` never touches installed skills.
+
+## Releasing (maintainers)
+
+```bash
+bash scripts/bump-version.sh 1.2.0
+```
+
+This updates `VERSION`, `.claude-plugin/plugin.json`, `.claude-plugin/marketplace.json`, and the `version:` field in `skills/design-brain/SKILL.md` together. Commit and push to `main` to publish.
 
 ## How it works
 
@@ -36,14 +75,20 @@ Helpers are optional. Companion skills (impeccable, emil-design-eng, avoid-ai-wr
 - **Research scout (stage 2):** isolated browsing, so raw page noise stays out of the design context.
 - **Fresh critic (stage 5):** no memory of building the page, so it reviews rendered pixels instead of its own reasoning.
 
-Claude Code gets both subagents from `skills/design-brain/agents/`, copied into `.claude/agents/` during setup. Other agents run the same steps in a clean chat.
+Claude Code gets both subagents from the plugin, or from `skills/design-brain/agents/` copied into `.claude/agents/` during setup when installed as a plain skill. Other agents run the same steps in a clean chat.
 
 ## Repository layout
 
 ```text
 design-brain-harness/
 ├── README.md
-├── INSTALL_PROMPT.md                  # Short prompt to paste into any coding agent
+├── INSTALL_PROMPT.md                  # One-shot prompt to paste into any coding agent
+├── VERSION                            # Single source of truth for update checks
+├── .claude-plugin/
+│   ├── plugin.json                    # Claude Code plugin manifest
+│   └── marketplace.json               # Marketplace listing (auto-updates)
+├── scripts/
+│   └── bump-version.sh                # Syncs version across all files
 ├── AGENTS.md / CLAUDE.md              # Pointers to the skill
 ├── LICENSE
 └── skills/

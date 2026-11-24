@@ -1,0 +1,14 @@
+{
+  "name": "design-brain",
+  "version": "1.1.0",
+  "description": "Design Brain Harness: a staged design workflow (brief, research, explore, build, critique) for AI coding agents that avoids generic AI-template output. Bundles the design-brain skill plus the research-scout and fresh-critic subagents.",
+  "author": { "name": "vroooom007" },
+  "homepage": "https://github.com/vroooom007/design-brain-harness",
+  "repository": "https://github.com/vroooom007/design-brain-harness",
+  "license": "MIT",
+  "skills": "./skills",
+  "agents": [
+    "./skills/design-brain/agents/research-scout.md",
+    "./skills/design-brain/agents/fresh-critic.md"
+  ]
+}
