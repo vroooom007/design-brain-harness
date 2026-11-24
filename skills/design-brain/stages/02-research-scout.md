@@ -14,7 +14,7 @@
      - **Optional:** User-provided URLs or brand `DESIGN.md` references (e.g., from `VoltAgent/awesome-design-md`).
 
 2. **Dispatch Disposable Research Scouts:**
-   - **In Claude Code:** Spawn `.claude/agents/research-scout.md` (1-2 parallel scouts) with the target URLs, the brief from `.design-harness/01-brief.md`, and the output folder `.design-harness/research/`.
+   - **In Claude Code:** Spawn the `research-scout` subagent (1-2 parallel scouts) with the target URLs, the brief from `.design-harness/01-brief.md`, and the output folder `.design-harness/research/`.
    - **In Codex / Cursor / Other Agents:** Use your browser/Playwright or web-search tool to inspect each target, save viewport screenshots (desktop hero + full or key section) into `.design-harness/research/screenshots/`, and write compact structured notes without keeping raw HTML in conversation history.
 
 3. **Required Anatomy Per Reference (`.design-harness/research/<site-slug>.md`):**

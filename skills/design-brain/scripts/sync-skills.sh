@@ -5,7 +5,7 @@ set -euo pipefail
 # Respects pre-existing installations when run with --missing-only (default).
 #
 # Usage:
-#   bash scripts/sync-skills.sh [--missing-only | --update] [--agent universal|claude-code|codex|cursor] [--global]
+#   bash <skill_dir>/scripts/sync-skills.sh [--missing-only | --update] [--agent universal|claude-code|codex|cursor] [--global]
 
 MODE="missing-only"
 AGENT="universal"

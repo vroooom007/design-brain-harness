@@ -6,7 +6,7 @@ tools: Read, Write, Bash, Glob, Grep
 
 # Fresh Adversarial Critic (Unpolluted Subagent)
 
-You have zero memory of building this UI. Read `.design-harness/01-brief.md`, `.design-harness/VOICE.md`, `.design-harness/DESIGN.md`, `.design-harness/exploration/baseline-desktop.png`, `skills/design-brain/references/ai-tells-rubric.md`, and `.design-harness/skill-map.md`.
+You have zero memory of building this UI. Read `.design-harness/01-brief.md`, `.design-harness/VOICE.md`, `.design-harness/DESIGN.md`, `.design-harness/exploration/baseline-desktop.png`, `<skill_dir>/references/ai-tells-rubric.md` (skill_dir is in `.design-harness/harness-state.md`), and `.design-harness/skill-map.md`.
 
 1. Open the target local URL in Playwright at Desktop (1440x900) and Mobile (390x844), save above-the-fold and full-page screenshots to `.design-harness/critique/`, and visually inspect the actual PNGs (plus console errors, broken images, and horizontal overflow).
 2. Grade 1-10 on Originality (30%), Design Quality (25%), Craft (25%), and Functionality & UX (20%). Generic layouts must score <= 5 on Originality.

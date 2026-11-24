@@ -4,15 +4,15 @@
 
 ## How to Run Unpolluted Critique
 
-- **In Claude Code:** Spawn `.claude/agents/fresh-critic.md` via the subagent tool. Pass ONLY:
+- **In Claude Code:** Spawn the `fresh-critic` subagent via the subagent tool. Pass ONLY:
   1. The live local URL (or preview HTML paths)
   2. Paths to `.design-harness/01-brief.md`, `.design-harness/VOICE.md`, `.design-harness/DESIGN.md`, and `.design-harness/exploration/baseline-*.png`
-  3. Path to `references/ai-tells-rubric.md`
+  3. Path to `<skill_dir>/references/ai-tells-rubric.md` (skill_dir is in `.design-harness/harness-state.md`)
   4. Path to `.design-harness/skill-map.md` (so the critic knows if `avoid-ai-writing`, `impeccable`, or `web-design-guidelines` are installed)
   **Do NOT pass your build transcript or explanations of why you made design choices.**
 
 - **In Codex / Cursor / Other Agents:**
-  - Open a fresh clean chat / isolated task (or call a second model via `adapters/cross-model-optional.md`) with the exact 4 inputs above and ask it to act strictly as an adversarial critic following `references/ai-tells-rubric.md`.
+  - Open a fresh clean chat / isolated task (or any other isolated context) with the exact 4 inputs above and ask it to act strictly as an adversarial critic following `<skill_dir>/references/ai-tells-rubric.md`.
 
 ## What the Fresh Critic Checks
 
@@ -27,7 +27,7 @@
    - **Craft (25%):** Typography scale, alignment, spacing math, motion polish, mobile responsiveness.
    - **Functionality & UX (20%):** Clear hierarchy, readable states, zero broken interactions or accessibility traps.
 
-3. **3-Tier AI Tells Audit (`references/ai-tells-rubric.md`):**
+3. **3-Tier AI Tells Audit (`<skill_dir>/references/ai-tells-rubric.md`):**
    - **Tier 1 (Floor - Must Fix):** Objective defects (broken mobile overflow, unreadable contrast, placeholder text, unapproved visual clichés, repeated redundant CTAs).
    - **Tier 2 (Reflex - Fix OR Override on the Record):** Common AI tells (eyebrow tags above every heading, tracked-caps labels, 3-column icon-box grids, accent-colored single words in headlines). If a Tier 2 item is genuinely intentional for this brand, it can stay ONLY with a 1-line justification logged in `.design-harness/critique/overrides.md`.
    - **Tier 3 (Finish - High-Craft Polish):** Micro-details (optical alignment, tabular numbers, focus rings, transition timing).

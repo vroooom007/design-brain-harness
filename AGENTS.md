@@ -1,11 +1,3 @@
 # Agents Entry Point
 
-This repository contains the **Design Brain Harness** following the `agentskills.io` open standard.
-
-- Primary skill router: `skills/design-brain/SKILL.md`
-- Stage playbooks (load only the active stage): `skills/design-brain/stages/`
-- Reference templates and rubrics: `skills/design-brain/references/`
-- Existing skill inventory script: `scripts/check-installed-skills.sh`
-- Safe companion skill installer: `scripts/sync-skills.sh`
-
-Do not load all stage playbooks into context at once. Read `skills/design-brain/SKILL.md` first, check `.design-harness/harness-state.md`, and load only the active stage.
+For any UI, web, or visual design work in this workspace, use the Design Brain skill: `skills/design-brain/SKILL.md` (agentskills.io format). Follow it end to end. It handles setup, helper skills, and stage order itself.
