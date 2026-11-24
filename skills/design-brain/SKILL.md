@@ -1,7 +1,7 @@
 ---
 name: design-brain
-version: "1.1.0"
-description: Full design process for web pages, landing pages, hero sections, and product UI, so the result is specific to the brand and not generic AI-template output. Use for every UI, UX, or visual design task in the workspace. This one skill handles setup, research, design direction, build, and critique by itself.
+version: "1.2.0"
+description: Full design process for NEW or REDESIGNED web pages, landing pages, hero sections, and product UI, so the result is specific to the brand and not generic AI-template output. Also handles small edits to an existing UI through a quick path. Handles setup, research, direction, build, and critique itself.
 compatibility: Works with Claude Code, OpenAI Codex, Cursor, Windsurf, Gemini CLI, and any agentskills.io-compatible agent. A browser tool (Playwright or the built-in browser) is needed for screenshots in stages 2 and 5.
 ---
 
@@ -13,11 +13,11 @@ You run the whole design process. The user gives you a design task. You work thr
 
 ## 0. Setup (automatic, check at the start of every session)
 
-0. **Silent update check.** Never block on this and never mention it unless an update was applied. Compare the local `version:` in this file's frontmatter with the remote one:
+0. **Silent update check.** Skip it if `.design-harness/config` contains `auto_update: false`. Never block on this and never mention it unless an update was applied. Compare the local `version:` in this file's frontmatter with the remote one:
    ```bash
    REMOTE="$(curl -fsS --max-time 3 https://raw.githubusercontent.com/vroooom007/design-brain-harness/main/VERSION 2>/dev/null | tr -d '[:space:]')"
    ```
-   If `REMOTE` is empty (offline, timeout, error), skip this step. If `REMOTE` is a version greater than the local one (`sort -V`), update: when installed as a Claude Code plugin, tell the user once to run `/reload-plugins` after `claude plugin update design-brain@design-brain-marketplace` (run that command yourself first); otherwise run `npx --yes skills@latest update design-brain -y`. Then continue with the current session without pausing. Check at most once per session.
+   If `REMOTE` is empty (offline, timeout, error), skip this step. If `REMOTE` is a version greater than the local one (`sort -V`), update: when installed as a Claude Code plugin, tell the user once to run `/reload-plugins` after `claude plugin update design-brain@design-brain-marketplace` (run that command yourself first); otherwise run `npx --yes skills@latest update design-brain -y`. Then print one line (`design-brain updated to <REMOTE>.`) and continue with the current session without pausing. Check at most once per session.
 1. **Project state.** If `.design-harness/harness-state.md` does not exist in the project root, create:
    - `.design-harness/research/`, `.design-harness/exploration/`, `.design-harness/critique/` (empty folders)
    - `.design-harness/harness-state.md` containing `stage: 01-brief-and-voice`, `surface: unset`, `baseline: unset`, and `skill_dir: <absolute SKILL_DIR>`.
@@ -25,7 +25,14 @@ You run the whole design process. The user gives you a design task. You work thr
 2. **Subagents (Claude Code only).** Skip if installed as the `design-brain` plugin (it bundles them). Otherwise, if `.claude/agents/` lacks `research-scout.md` or `fresh-critic.md`, copy them from `SKILL_DIR/agents/`. Never overwrite a file that already exists.
 3. **Companion skills.** Run `bash SKILL_DIR/scripts/check-installed-skills.sh` and write the results to `.design-harness/skill-map.md`. The details are in `references/companion-skills.md`.
 4. **Missing helpers.** If any companion skill is missing and the user already ran the install flow (`INSTALL_PROMPT.md`), do nothing more: it has installed what it could. If the user invoked this skill manually without that flow, install the missing ones silently with `bash SKILL_DIR/scripts/sync-skills.sh --missing-only`, re-run step 3, and mention in one short line which helpers were added or are unavailable. Do not ask for confirmation. The design process works without helpers.
-5. **Browser.** Check for Playwright or the built-in browser. If neither is available, tell the user once and continue. In stage 5 the critique then works from the code and copy only, and the audit file says so.
+5. **Browser.** Use the first that works: Playwright, then the built-in browser, then none. Record it in `harness-state.md` as `browser: playwright|builtin|none`. At `none`, skip screenshots and tell the user once; the stage 5 audit then works from code and copy only, says so, and marks its scores "low confidence".
+
+## 0.5 Pick the mode (decide silently)
+
+- **Quick mode:** the request changes an existing UI (a component, spacing, a state, a copy tweak) and the project already has a visual language. Read the existing tokens or `DESIGN.md`, or infer them from the code. Make the change in the existing style, take one before/after screenshot if a browser is available, and stop. Do not create `.design-harness/`, run stages, or pause. Skip section 0 steps 1 to 5 in this mode.
+- **Full mode:** a new page, a redesign, or no existing visual language. Continue to section 1.
+
+If unsure, choose quick mode and offer full mode in one sentence at the end.
 
 ## 1. Where you are
 

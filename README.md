@@ -55,6 +55,13 @@ bash scripts/bump-version.sh 1.2.0
 
 This updates `VERSION`, `.claude-plugin/plugin.json`, `.claude-plugin/marketplace.json`, and the `version:` field in `skills/design-brain/SKILL.md` together. Commit and push to `main` to publish.
 
+## Modes
+
+- **Quick mode:** small edits to an existing UI. The skill matches the existing style, makes the change, and stops. No stages, no pauses.
+- **Full mode:** new pages, redesigns, and anything without an existing visual language. Runs the five stages below.
+
+The agent picks the mode itself.
+
 ## How it works
 
 One entry point: [`skills/design-brain/SKILL.md`](./skills/design-brain/SKILL.md). The agent reads the stage in `.design-harness/harness-state.md`, loads only that stage, and moves on when it is done. It fetches helper skills and subagents when a stage needs them. It pauses for you at four points: approving the brief, reacting to references, picking a direction, and the final review.
@@ -65,7 +72,7 @@ One entry point: [`skills/design-brain/SKILL.md`](./skills/design-brain/SKILL.md
 | 2. Research | Isolated subagent browses 3–5 live references and writes steal/reject notes |
 | 3. Explore | Two or three divergent rendered directions. You pick one or a hybrid. This is the baseline |
 | 4. Build | `DESIGN.md` is extracted from the approved baseline, then the rest is built |
-| 5. Critique | Isolated subagent renders desktop and mobile, grades on four axes, and checks for AI tells |
+| 5. Critique | Isolated subagent renders desktop and mobile, grades on four axes (every finding must cite evidence), and checks for AI tells |
 
 Helpers are optional. Companion skills (impeccable, emil-design-eng, avoid-ai-writing, and others) are detected and used only at the stage that needs them. If a helper is missing, the stage falls back to its own guidance.
 
@@ -88,8 +95,10 @@ design-brain-harness/
 ├── .claude-plugin/
 │   ├── plugin.json                    # Claude Code plugin manifest
 │   └── marketplace.json               # Marketplace listing (auto-updates)
+├── .github/workflows/ci.yml           # Script syntax and version-sync checks
 ├── scripts/
-│   └── bump-version.sh                # Syncs version across all files
+│   ├── bump-version.sh                # Syncs version across all files
+│   └── check-version-sync.sh          # Fails if version fields disagree
 ├── AGENTS.md / CLAUDE.md              # Pointers to the skill
 ├── LICENSE
 └── skills/

@@ -25,6 +25,7 @@ replace .claude-plugin/plugin.json      "s/(\"version\": *\")[^\"]*(\")/\1$NEW\2
 replace .claude-plugin/marketplace.json "s/(\"version\": *\")[^\"]*(\")/\1$NEW\2/"
 replace skills/design-brain/SKILL.md    "s/^version: *\"?[0-9][^\"]*\"?\$/version: \"$NEW\"/"
 
+bash scripts/check-version-sync.sh
 echo "Bumped to $NEW:"
 grep -Hn "version" VERSION .claude-plugin/plugin.json .claude-plugin/marketplace.json
 grep -Hn "^version:" skills/design-brain/SKILL.md

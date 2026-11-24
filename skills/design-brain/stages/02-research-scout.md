@@ -17,6 +17,8 @@
    - **In Claude Code:** Spawn the `research-scout` subagent (1-2 parallel scouts) with the target URLs, the brief from `.design-harness/01-brief.md`, and the output folder `.design-harness/research/`.
    - **In Codex / Cursor / Other Agents:** Use your browser/Playwright or web-search tool to inspect each target, save viewport screenshots (desktop hero + full or key section) into `.design-harness/research/screenshots/`, and write compact structured notes without keeping raw HTML in conversation history.
 
+   - **No browser (`browser: none`):** use WebFetch or web search to read each reference's text and structure. Skip screenshots, put `evidence: text-only` at the top of each teardown, and omit its First-5-Seconds Read.
+
 3. **Required Anatomy Per Reference (`.design-harness/research/<site-slug>.md`):**
    Keep each teardown sharp and concrete (no vague adjectives like "clean and modern"):
    - **URL & Screenshot path**

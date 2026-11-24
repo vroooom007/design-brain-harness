@@ -6,7 +6,7 @@
     {
       "name": "design-brain",
       "source": "./",
-      "version": "1.1.0",
+      "version": "1.2.0",
       "description": "Staged design workflow for AI coding agents: skill plus research-scout and fresh-critic subagents."
     }
   ]

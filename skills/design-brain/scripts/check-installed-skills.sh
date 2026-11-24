@@ -69,7 +69,7 @@ else
 fi
 
 if command -v playwright >/dev/null 2>&1 || npx --no-install playwright --version >/dev/null 2>&1; then
-  echo "Playwright: AVAILABLE"
+  echo "Browser: playwright"
 else
-  echo "Playwright: NOT DETECTED locally (needed for Stage 2 & Stage 5 browser screenshots)"
+  echo "Browser: NONE DETECTED (use the built-in browser if present, otherwise code and copy only)"
 fi

@@ -1,6 +1,6 @@
 # Companion Skills: Detection, Install, and Use
 
-Companion skills are optional. Each stage works without them. This file is for setup only (step 3 and 4 of `SKILL.md`). The agent uses it on its own. Do not present it to the user as a menu.
+Companion skills are optional. Each stage works without them. This file is for setup only (steps 3 and 4 of `SKILL.md`). The agent uses it on its own. Do not present it to the user as a menu.
 
 ## 1. Where to look
 
@@ -24,10 +24,10 @@ Other skills, such as `frontend-design` or the sales and SEO packs, are not part
 
 ## 3. Install
 
-`scripts/sync-skills.sh --missing-only` installs what is missing. It skips anything already present. Run it only after the user says yes in step 4 of `SKILL.md`.
+`scripts/sync-skills.sh --missing-only` installs what is missing. It skips anything already present. It runs silently at setup (step 4 of `SKILL.md`) and does not ask for confirmation.
 
 Known limits:
-- `impeccable` installs through its own interactive CLI (`npx impeccable install`). The sync script only prints that command. If the user wants impeccable, run that command in the terminal and let the user answer its prompts.
+- `impeccable` installs non-interactively with `npx --yes impeccable install -y --providers=claude,codex,cursor --scope=project`, falling back to `npx skills add pbakaus/impeccable`. `--update` runs `npx --yes impeccable update`.
 - The `npx skills` commands fetch packages from npm and GitHub at install time. Check each one's output. If an install fails, record `missing-skipped` in `skill-map.md` and continue.
 
 ## 4. Record results

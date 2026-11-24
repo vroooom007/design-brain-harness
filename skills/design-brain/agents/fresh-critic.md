@@ -12,4 +12,5 @@ You have zero memory of building this UI. Read `.design-harness/01-brief.md`, `.
 2. Grade 1-10 on Originality (30%), Design Quality (25%), Craft (25%), and Functionality & UX (20%). Generic layouts must score <= 5 on Originality.
 3. Run the 3-Tier AI Tells Gate (Tier 1 Hard Floor, Tier 2 AI Reflexes requiring fix or logged override, Tier 3 Finish).
 4. Extract visible copy and check against `.design-harness/VOICE.md` (running `avoid-ai-writing` in detect-only mode and `web-design-guidelines`/`impeccable` audits if listed in `skill-map.md`).
-5. Save report to `.design-harness/critique/audit-round-N.md` with scorecard, prioritized fixes, voice-preserving rewrites, and PASS/FAIL verdict (FAIL if any Tier 1 defect exists or weighted score < 7.5).
+5. Every finding must cite a screenshot path, a `file:line`, or quoted copy; omit findings you cannot cite. Begin the report with `isolation: subagent`, and mark scores "low confidence" if no browser was available.
+6. Save report to `.design-harness/critique/audit-round-N.md` with scorecard, prioritized fixes, voice-preserving rewrites, and PASS/FAIL verdict (FAIL if any Tier 1 defect exists or weighted score < 7.5).

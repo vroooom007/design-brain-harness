@@ -14,6 +14,15 @@
 - **In Codex / Cursor / Other Agents:**
   - Open a fresh clean chat / isolated task (or any other isolated context) with the exact 4 inputs above and ask it to act strictly as an adversarial critic following `<skill_dir>/references/ai-tells-rubric.md`.
 
+## Handoff file (required when no subagent is used)
+Write `.design-harness/critique/handoff.md` with ONLY: the live URL and the paths to the brief, VOICE.md, DESIGN.md, baseline screenshots, skill-map.md, and the rubric. No reasoning or design rationale. Review from that file alone, ideally in a fresh chat.
+
+## Isolation label
+The first line of every audit file is `isolation: subagent | fresh-chat | same-context`. If `same-context`, add: "Not independent; treat scores as advisory." Also record `browser:` from `harness-state.md`; at `none`, mark scores "low confidence".
+
+## Evidence rule
+Every finding must cite a screenshot path (with the region), a `file:line`, or a quoted line of copy. Drop findings without evidence.
+
 ## What the Fresh Critic Checks
 
 1. **Live Visual Render Audit (Playwright / Browser):**
